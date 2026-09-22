@@ -15,6 +15,7 @@ import '../../../../chat/presentation/providers/chat_provider.dart';
 import '../../../../../features/listings/data/models/jobs_listing_model.dart';
 import '../../../../../core/utils/image_url.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import '../../../../../core/utils/whatsapp.dart';
 
 class JobsDetailScreen extends ConsumerStatefulWidget {
   final JobsListingModel item;
@@ -288,8 +289,7 @@ class _JobsDetailScreenState extends ConsumerState<JobsDetailScreen> {
                   const SizedBox(width: 8),
                   Expanded(
                       child: _whatsAppAction(
-                          onTap: () => _launch(
-                              'https://wa.me/${item.phone.replaceAll(RegExp(r'[^0-9]'), '')}'))),
+                          onTap: () => openWhatsApp(context, item.phone))),
                   const SizedBox(width: 8),
                   Expanded(
                       child: _detailAction(Icons.message_outlined, context.l10n.t('chat'),

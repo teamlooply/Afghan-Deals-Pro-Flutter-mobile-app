@@ -6,6 +6,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../../core/localization/app_localizations.dart';
 import '../providers/sell_provider.dart';
 import '../providers/sell_subcategories_provider.dart';
+import '../../../../core/auth/app_auth.dart';
 
 // ── Static options ─────────────────────────────────────────────────────────────
 
@@ -145,6 +146,7 @@ class _PostMobileScreenState extends ConsumerState<PostMobileScreen> {
   final _screenSizeCtrl = TextEditingController();
   final _cityCtrl = TextEditingController();
   final _versionCtrl = TextEditingController();
+  final _whatsappCtrl = TextEditingController();
 
   // Selections
   String _brand = '';
@@ -162,7 +164,15 @@ class _PostMobileScreenState extends ConsumerState<PostMobileScreen> {
   String _selectedSubcategory = '';
 
   @override
+  void initState() {
+    super.initState();
+    // Phone-login users already gave us their number; everyone else types it.
+    _whatsappCtrl.text = AppAuth.currentUserPhone?.trim() ?? '';
+  }
+
+  @override
   void dispose() {
+    _whatsappCtrl.dispose();
     _titleCtrl.dispose();
     _modelCtrl.dispose();
     _priceCtrl.dispose();
@@ -215,6 +225,11 @@ class _PostMobileScreenState extends ConsumerState<PostMobileScreen> {
         'age': _age,
         'screen_size': _screenSize,
         'color': _color,
+        if (_whatsappCtrl.text.trim().isNotEmpty) ...{
+          'whatsapp': _whatsappCtrl.text.trim(),
+          'phone': _whatsappCtrl.text.trim(),
+          'seller_phone': _whatsappCtrl.text.trim(),
+        },
         'warranty': _warranty,
         'battery_health': _battery,
         'version': _versionCtrl.text.trim(),
@@ -651,6 +666,15 @@ class _PostMobileScreenState extends ConsumerState<PostMobileScreen> {
                           : null,
                     ),
                   ),
+                  _Field(
+                    label: 'WhatsApp Number',
+                    child: _textInput(
+                      controller: _whatsappCtrl,
+                      hint: 'e.g. +93 70 123 4567',
+                      keyboardType: TextInputType.phone,
+                      validator: _validateWhatsapp,
+                    ),
+                  ),
                 ],
               ),
             ],
@@ -743,6 +767,15 @@ class _PostMobileScreenState extends ConsumerState<PostMobileScreen> {
   }
 
   // ── Helpers ─────────────────────────────────────────────────────────────────
+
+  String? _validateWhatsapp(String? value) {
+    final digits = (value ?? '').replaceAll(RegExp(r'[^0-9]'), '');
+    if (digits.isEmpty) return null; // optional
+    if (digits.length < 9 || digits.length > 15) {
+      return 'Enter the number with country code, e.g. +93 70 123 4567';
+    }
+    return null;
+  }
 
   Widget _textInput({
     required TextEditingController controller,

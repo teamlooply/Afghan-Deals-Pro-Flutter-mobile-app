@@ -413,6 +413,9 @@ class AppLocalizations {
       'check_out_listing': 'Check out this car: {text} - {price} on Afghan Deals Pro',
     },
     'ps': {
+      'WhatsApp Number': 'د واټساپ شمېره',
+      'e.g. +93 70 123 4567': 'لکه +93 70 123 4567',
+      'Enter the number with country code, e.g. +93 70 123 4567': 'شمېره د هېواد له کوډ سره ولیکئ، لکه +93 70 123 4567',
       'Add field': 'نوې برخه اضافه کړئ',
       'Camera': 'کیمره',
       'Gallery': 'ګالري',
