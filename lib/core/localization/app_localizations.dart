@@ -31,7 +31,6 @@ class AppLocalizations {
 
   static const _localizedValues = <String, Map<String, String>>{
     'en': {
-      'admin_dashboard': 'Admin Dashboard',
       'exterior_color': 'Exterior Color',
       'interior_color': 'Interior Color',
       'regional_specs': 'Regional Specs',
@@ -414,7 +413,6 @@ class AppLocalizations {
       'check_out_listing': 'Check out this car: {text} - {price} on Afghan Deals Pro',
     },
     'ps': {
-      'admin_dashboard': 'د اډمین ډشبورډ',
       'WhatsApp Number': 'د واټساپ شمېره',
       'e.g. +93 70 123 4567': 'لکه +93 70 123 4567',
       'Enter the number with country code, e.g. +93 70 123 4567': 'شمېره د هېواد له کوډ سره ولیکئ، لکه +93 70 123 4567',
@@ -960,7 +958,6 @@ class AppLocalizations {
       'check_out_listing': 'دا موتر وگوره: {text} - {price} د Afghan Deals Pro کې',
     },
     'fa': {
-      'admin_dashboard': 'داشبورد مدیر',
       'exterior_color': 'رنگ بیرونی',
       'interior_color': 'رنگ داخلی',
       'regional_specs': 'مشخصات منطقه‌ای',
@@ -1319,7 +1316,6 @@ class AppLocalizations {
       'check_out_listing': 'اس خودرو کو دیکھیں: {text} - {price} on Afghan Deals Pro',
     },
     'ur': {
-      'admin_dashboard': 'ایڈمن ڈیش بورڈ',
       'exterior_color': 'بیرونی رنگ',
       'interior_color': 'اندرونی رنگ',
       'regional_specs': 'علاقائی تفصیلات',
