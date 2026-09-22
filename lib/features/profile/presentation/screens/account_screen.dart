@@ -34,6 +34,27 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
   String _selectedLanguage = 'English';
   bool _loadedPreferences = false;
 
+  // The admin dashboard had no way in from the app. Only admins see the tile;
+  // the RPC answers through current_profile_id(), so email, Google, Apple and
+  // phone logins are all recognised the same way the database recognises them.
+  bool _isAdmin = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAdminFlag();
+  }
+
+  Future<void> _loadAdminFlag() async {
+    try {
+      final result =
+          await Supabase.instance.client.rpc('current_user_is_admin');
+      if (mounted && result == true) setState(() => _isAdmin = true);
+    } catch (_) {
+      // Not signed in, or offline - the tile simply stays hidden.
+    }
+  }
+
   void _loadPreferences(dynamic profile, List<String> languages) {
     if (_loadedPreferences) return;
     _loadedPreferences = true;
@@ -640,6 +661,12 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
                       context.l10n.t('language'), _selectedLanguage,
                       onTap: _showLanguagePicker),
                   _line(),
+                  if (_isAdmin) ...[
+                    _flatItem(Icons.admin_panel_settings_outlined,
+                        context.l10n.t('admin_dashboard'), null,
+                        onTap: () => context.push(RouteNames.adminDashboard)),
+                    _line(),
+                  ],
                   _flatItem(Icons.delete_outline, 'Delete Account', null,
                       onTap: () {
                     context.push(RouteNames.deleteAccount);

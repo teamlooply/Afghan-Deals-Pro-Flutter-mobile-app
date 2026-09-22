@@ -8,6 +8,7 @@ import '../../../../core/router/route_names.dart';
 import 'admin_filter_options_screen.dart';
 import 'admin_regions_screen.dart';
 import 'admin_price_settings_screen.dart';
+import 'admin_whatsapp_screen.dart';
 
 const _kBlue = Color(0xFF2258A8);
 
@@ -135,6 +136,15 @@ class AdminDashboardScreen extends ConsumerWidget {
                     subtitle: 'View & monitor\nuser chats',
                     color: const Color(0xFFEC407A),
                     onTap: () => context.push(RouteNames.adminChats),
+                  ),
+                  _AdminCard(
+                    icon: Icons.phone_in_talk_outlined,
+                    title: 'WhatsApp Numbers',
+                    subtitle: 'Add numbers for\nsellers without one',
+                    color: const Color(0xFF25D366),
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const AdminWhatsAppScreen()),
+                    ),
                   ),
                 ],
               ),
