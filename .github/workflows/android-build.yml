@@ -27,11 +27,22 @@ jobs:
         run: flutter pub get
 
       - name: Create keystore from secrets
+        env:
+          ANDROID_KEYSTORE: ${{ secrets.ANDROID_KEYSTORE }}
+          KEY_PROPERTIES: ${{ secrets.KEY_PROPERTIES }}
         run: |
-          if [ ! -z "${{ secrets.ANDROID_KEYSTORE }}" ]; then
-            echo "${{ secrets.ANDROID_KEYSTORE }}" | base64 -d > android/app/key.jks
-            echo "${{ secrets.KEY_PROPERTIES }}" | base64 -d > android/key.properties
+          # key.properties names storeFile=upload-keystore.jks, which
+          # build.gradle resolves against android/ - so the keystore has to land
+          # there, not in android/app/.
+          #
+          # Fail loudly instead of quietly building a debug-signed bundle: Play
+          # rejects those, and the step used to pass green while doing nothing.
+          if [ -z "$ANDROID_KEYSTORE" ] || [ -z "$KEY_PROPERTIES" ]; then
+            echo "::error::ANDROID_KEYSTORE / KEY_PROPERTIES secrets are missing"
+            exit 1
           fi
+          echo "$ANDROID_KEYSTORE" | base64 -d > android/upload-keystore.jks
+          echo "$KEY_PROPERTIES"   | base64 -d > android/key.properties
 
       - name: Build release APK
         run: flutter build apk --release
