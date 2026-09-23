@@ -6,6 +6,8 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../../core/localization/app_localizations.dart';
 import '../providers/sell_provider.dart';
 import '../../../../core/auth/app_auth.dart';
+import '../widgets/customer_posting_section.dart';
+import '../providers/staff_provider.dart';
 
 // ── Static data ────────────────────────────────────────────────────────────────
 
@@ -253,6 +255,10 @@ class _PostCarScreenState extends ConsumerState<PostCarScreen> {
   final _cityCtrl = TextEditingController();
   final _whatsappCtrl = TextEditingController();
   final _sellerNameCtrl = TextEditingController();
+  bool _forCustomer = false;
+  final _customerNameCtrl = TextEditingController();
+  final _customerPhoneCtrl = TextEditingController();
+
 
   String _subcategory = '';
   String _rentalDuration = '';
@@ -287,6 +293,8 @@ class _PostCarScreenState extends ConsumerState<PostCarScreen> {
 
   @override
   void dispose() {
+    _customerNameCtrl.dispose();
+    _customerPhoneCtrl.dispose();
     _sellerNameCtrl.dispose();
     _whatsappCtrl.dispose();
     _titleCtrl.dispose();
@@ -346,6 +354,8 @@ class _PostCarScreenState extends ConsumerState<PostCarScreen> {
         // Left empty, the repository falls back to the poster's own name.
         'seller_name': _sellerNameCtrl.text.trim(),
       },
+      customerPhone: _forCustomer ? _customerPhoneCtrl.text : null,
+      customerName: _forCustomer ? _customerNameCtrl.text : null,
       categoryData: {
         'make': _make,
         'model': model,
@@ -598,6 +608,16 @@ class _PostCarScreenState extends ConsumerState<PostCarScreen> {
               const SizedBox(height: 8),
 
               // ── Ad Type ───────────────────────────────────────────────
+              Consumer(builder: (context, ref, _) {
+                final isStaff = ref.watch(isStaffProvider).value ?? false;
+                if (!isStaff) return const SizedBox.shrink();
+                return CustomerPostingSection(
+                  enabled: _forCustomer,
+                  onChanged: (v) => setState(() => _forCustomer = v),
+                  nameController: _customerNameCtrl,
+                  phoneController: _customerPhoneCtrl,
+                );
+              }),
               _Section(title: 'Ad Type', children: [
                 _Field(
                   label: 'Subcategory *',

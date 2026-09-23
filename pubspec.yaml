@@ -3,7 +3,7 @@ description: Afghan Deals Pro - The trusted community of buyers and sellers
 
 publish_to: 'none'
 
-version: 1.0.4+35
+version: 1.0.4+36
 
 environment:
   sdk: '>=3.0.0 <4.0.0'

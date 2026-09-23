@@ -7,6 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../../core/localization/app_localizations.dart';
 import '../providers/sell_provider.dart';
+import '../widgets/customer_posting_section.dart';
+import '../providers/staff_provider.dart';
 
 const _kBlue = Color(0xFF2258A8);
 
@@ -56,6 +58,10 @@ class _PostPropertyScreenState extends ConsumerState<PostPropertyScreen> {
   final _cityCtrl = TextEditingController();
   final _contactNameCtrl = TextEditingController();
   final _phoneCtrl = TextEditingController();
+  bool _forCustomer = false;
+  final _customerNameCtrl = TextEditingController();
+  final _customerPhoneCtrl = TextEditingController();
+
   final _addressCtrl = TextEditingController();
   final _amenitiesCtrl = TextEditingController();
 
@@ -69,6 +75,8 @@ class _PostPropertyScreenState extends ConsumerState<PostPropertyScreen> {
 
   @override
   void dispose() {
+    _customerNameCtrl.dispose();
+    _customerPhoneCtrl.dispose();
     _titleCtrl.dispose();
     _descCtrl.dispose();
     _priceCtrl.dispose();
@@ -110,6 +118,8 @@ class _PostPropertyScreenState extends ConsumerState<PostPropertyScreen> {
             ? 'for-rent-residential'
             : 'for-sale-residential',
       },
+      customerPhone: _forCustomer ? _customerPhoneCtrl.text : null,
+      customerName: _forCustomer ? _customerNameCtrl.text : null,
       categoryData: {
         'property_type': _propertyType,
         'purpose': _purpose,
@@ -242,6 +252,16 @@ class _PostPropertyScreenState extends ConsumerState<PostPropertyScreen> {
             children: [
               _PhotoSection(sell: sell),
               const SizedBox(height: 8),
+              Consumer(builder: (context, ref, _) {
+                final isStaff = ref.watch(isStaffProvider).value ?? false;
+                if (!isStaff) return const SizedBox.shrink();
+                return CustomerPostingSection(
+                  enabled: _forCustomer,
+                  onChanged: (v) => setState(() => _forCustomer = v),
+                  nameController: _customerNameCtrl,
+                  phoneController: _customerPhoneCtrl,
+                );
+              }),
               _Section(
                 title: 'Basic Info',
                 children: [

@@ -31,6 +31,10 @@ class AppLocalizations {
 
   static const _localizedValues = <String, Map<String, String>>{
     'en': {
+      'Post for a customer': 'Post for a customer',
+      'Customer Name': 'Customer Name',
+      'Customer WhatsApp Number': 'Customer WhatsApp Number',
+      'The ad goes into the customer account for this number.': 'The ad goes into the customer account for this number.',
       'e.g. Ahmed Khan': 'e.g. Ahmed Khan',
       'exterior_color': 'Exterior Color',
       'interior_color': 'Interior Color',
@@ -414,6 +418,10 @@ class AppLocalizations {
       'check_out_listing': 'Check out this car: {text} - {price} on Afghan Deals Pro',
     },
     'ps': {
+      'Post for a customer': 'د پیرودونکي لپاره اعلان',
+      'Customer Name': 'د پیرودونکي نوم',
+      'Customer WhatsApp Number': 'د پیرودونکي د واټساپ شمېره',
+      'The ad goes into the customer account for this number.': 'اعلان به د دې شمېرې د پیرودونکي حساب ته ولاړ شي.',
       'e.g. Ahmed Khan': 'لکه احمد خان',
       'WhatsApp Number': 'د واټساپ شمېره',
       'e.g. +93 70 123 4567': 'لکه +93 70 123 4567',
@@ -960,6 +968,10 @@ class AppLocalizations {
       'check_out_listing': 'دا موتر وگوره: {text} - {price} د Afghan Deals Pro کې',
     },
     'fa': {
+      'Post for a customer': 'ثبت اعلان برای مشتری',
+      'Customer Name': 'نام مشتری',
+      'Customer WhatsApp Number': 'شماره واتساپ مشتری',
+      'The ad goes into the customer account for this number.': 'اعلان به حساب مشتری این شماره می‌رود.',
       'e.g. Ahmed Khan': 'مثلاً احمد خان',
       'exterior_color': 'رنگ بیرونی',
       'interior_color': 'رنگ داخلی',
@@ -1319,6 +1331,10 @@ class AppLocalizations {
       'check_out_listing': 'اس خودرو کو دیکھیں: {text} - {price} on Afghan Deals Pro',
     },
     'ur': {
+      'Post for a customer': 'گاہک کے لیے اشتہار',
+      'Customer Name': 'گاہک کا نام',
+      'Customer WhatsApp Number': 'گاہک کا واٹس ایپ نمبر',
+      'The ad goes into the customer account for this number.': 'اشتہار اس نمبر کے گاہک کے اکاؤنٹ میں جائے گا۔',
       'e.g. Ahmed Khan': 'مثلاً احمد خان',
       'exterior_color': 'بیرونی رنگ',
       'interior_color': 'اندرونی رنگ',

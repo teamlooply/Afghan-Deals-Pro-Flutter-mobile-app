@@ -11,6 +11,8 @@ import '../../../../core/widgets/app_button.dart';
 import '../../../../core/widgets/app_text_field.dart';
 import '../providers/sell_provider.dart';
 import '../providers/sell_subcategories_provider.dart';
+import '../widgets/customer_posting_section.dart';
+import '../providers/staff_provider.dart';
 
 class _Country {
   final String name;
@@ -216,6 +218,9 @@ class _PostAdScreenState extends ConsumerState<PostAdScreen> {
   final _priceCtrl = TextEditingController();
   final _cityCtrl = TextEditingController();
   final _sellerNameCtrl = TextEditingController();
+  bool _forCustomer = false;
+  final _customerNameCtrl = TextEditingController();
+  final _customerPhoneCtrl = TextEditingController();
   late final List<_DetailRow> _details;
 
   _Country _country = _kCountries.first;
@@ -243,6 +248,8 @@ class _PostAdScreenState extends ConsumerState<PostAdScreen> {
     _descCtrl.dispose();
     _priceCtrl.dispose();
     _cityCtrl.dispose();
+    _customerNameCtrl.dispose();
+    _customerPhoneCtrl.dispose();
     _sellerNameCtrl.dispose();
     for (final row in _details) {
       row.dispose();
@@ -511,6 +518,8 @@ class _PostAdScreenState extends ConsumerState<PostAdScreen> {
             // Left empty, the repository falls back to the poster's own name.
             'seller_name': _sellerNameCtrl.text.trim(),
           },
+          customerPhone: _forCustomer ? _customerPhoneCtrl.text : null,
+          customerName: _forCustomer ? _customerNameCtrl.text : null,
           categoryData: categoryData,
         );
   }
@@ -585,6 +594,16 @@ class _PostAdScreenState extends ConsumerState<PostAdScreen> {
             children: [
               _buildPhotoSection(sellState),
               const SizedBox(height: 18),
+              Consumer(builder: (context, ref, _) {
+                final isStaff = ref.watch(isStaffProvider).value ?? false;
+                if (!isStaff) return const SizedBox.shrink();
+                return CustomerPostingSection(
+                  enabled: _forCustomer,
+                  onChanged: (v) => setState(() => _forCustomer = v),
+                  nameController: _customerNameCtrl,
+                  phoneController: _customerPhoneCtrl,
+                );
+              }),
               _label('Subcategory'),
               _buildSubcategorySection(subcategoriesAsync),
               const SizedBox(height: 16),
