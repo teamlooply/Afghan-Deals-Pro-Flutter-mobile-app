@@ -215,6 +215,7 @@ class _PostAdScreenState extends ConsumerState<PostAdScreen> {
   final _descCtrl = TextEditingController();
   final _priceCtrl = TextEditingController();
   final _cityCtrl = TextEditingController();
+  final _sellerNameCtrl = TextEditingController();
   late final List<_DetailRow> _details;
 
   _Country _country = _kCountries.first;
@@ -242,6 +243,7 @@ class _PostAdScreenState extends ConsumerState<PostAdScreen> {
     _descCtrl.dispose();
     _priceCtrl.dispose();
     _cityCtrl.dispose();
+    _sellerNameCtrl.dispose();
     for (final row in _details) {
       row.dispose();
     }
@@ -506,6 +508,8 @@ class _PostAdScreenState extends ConsumerState<PostAdScreen> {
             'subcategory': _selectedSubcategory.isNotEmpty
                 ? _selectedSubcategory
                 : 'general',
+            // Left empty, the repository falls back to the poster's own name.
+            'seller_name': _sellerNameCtrl.text.trim(),
           },
           categoryData: categoryData,
         );
@@ -699,6 +703,12 @@ class _PostAdScreenState extends ConsumerState<PostAdScreen> {
                 hintText: context.l10n.t('e.g. Dubai'),
                 validator: (v) =>
                     (v == null || v.trim().isEmpty) ? 'City is required' : null,
+              ),
+              const SizedBox(height: 16),
+              _label(context.l10n.t('Seller Name')),
+              AppTextField(
+                controller: _sellerNameCtrl,
+                hintText: context.l10n.t('e.g. Ahmed Khan'),
               ),
               const SizedBox(height: 20),
               Row(

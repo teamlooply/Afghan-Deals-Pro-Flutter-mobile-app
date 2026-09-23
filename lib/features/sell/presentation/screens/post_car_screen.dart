@@ -252,6 +252,7 @@ class _PostCarScreenState extends ConsumerState<PostCarScreen> {
   final _modelCtrl = TextEditingController();
   final _cityCtrl = TextEditingController();
   final _whatsappCtrl = TextEditingController();
+  final _sellerNameCtrl = TextEditingController();
 
   String _subcategory = '';
   String _rentalDuration = '';
@@ -286,6 +287,7 @@ class _PostCarScreenState extends ConsumerState<PostCarScreen> {
 
   @override
   void dispose() {
+    _sellerNameCtrl.dispose();
     _whatsappCtrl.dispose();
     _titleCtrl.dispose();
     _descCtrl.dispose();
@@ -341,6 +343,8 @@ class _PostCarScreenState extends ConsumerState<PostCarScreen> {
         'city': _cityCtrl.text.trim(),
         'country': _country.name,
         'subcategory': normalizedSubcategory,
+        // Left empty, the repository falls back to the poster's own name.
+        'seller_name': _sellerNameCtrl.text.trim(),
       },
       categoryData: {
         'make': _make,
@@ -830,6 +834,13 @@ class _PostCarScreenState extends ConsumerState<PostCarScreen> {
                     validator: (v) => v == null || v.trim().isEmpty
                         ? 'City is required'
                         : null,
+                  ),
+                ),
+                _Field(
+                  label: 'Seller Name',
+                  child: _textInput(
+                    controller: _sellerNameCtrl,
+                    hint: 'e.g. Ahmed Khan',
                   ),
                 ),
                 _Field(

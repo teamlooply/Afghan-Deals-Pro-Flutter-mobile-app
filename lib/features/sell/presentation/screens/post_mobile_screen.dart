@@ -147,6 +147,7 @@ class _PostMobileScreenState extends ConsumerState<PostMobileScreen> {
   final _cityCtrl = TextEditingController();
   final _versionCtrl = TextEditingController();
   final _whatsappCtrl = TextEditingController();
+  final _sellerNameCtrl = TextEditingController();
 
   // Selections
   String _brand = '';
@@ -172,6 +173,7 @@ class _PostMobileScreenState extends ConsumerState<PostMobileScreen> {
 
   @override
   void dispose() {
+    _sellerNameCtrl.dispose();
     _whatsappCtrl.dispose();
     _titleCtrl.dispose();
     _modelCtrl.dispose();
@@ -213,6 +215,8 @@ class _PostMobileScreenState extends ConsumerState<PostMobileScreen> {
         'city': _cityCtrl.text.trim(),
         'country': _country.name,
         'subcategory': selectedSubcategory,
+        // Left empty, the repository falls back to the poster's own name.
+        'seller_name': _sellerNameCtrl.text.trim(),
       },
       categoryData: {
         'subcategory': selectedSubcategory,
@@ -664,6 +668,13 @@ class _PostMobileScreenState extends ConsumerState<PostMobileScreen> {
                       validator: (v) => v == null || v.trim().isEmpty
                           ? 'City is required'
                           : null,
+                    ),
+                  ),
+                  _Field(
+                    label: 'Seller Name',
+                    child: _textInput(
+                      controller: _sellerNameCtrl,
+                      hint: 'e.g. Ahmed Khan',
                     ),
                   ),
                   _Field(
