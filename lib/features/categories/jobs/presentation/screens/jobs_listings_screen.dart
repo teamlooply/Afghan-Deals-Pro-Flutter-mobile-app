@@ -296,11 +296,7 @@ class _JobResultCardState extends State<_JobResultCard> {
     );
   }
 
-  Future<void> _handleCall() async {
-    final cleaned = widget.item.phone.replaceAll(RegExp(r'[^0-9+]'), '');
-    final phone = cleaned;
-    await launchUrl(Uri.parse('tel:$phone'));
-  }
+  Future<void> _handleCall() => openPhoneCall(context, widget.item.phone);
 
   void _handleChat() {
     widget.onChat();

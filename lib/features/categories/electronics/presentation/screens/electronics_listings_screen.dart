@@ -411,9 +411,9 @@ class _ListingCard extends ConsumerWidget {
                 Row(
                   children: [
                     const Spacer(),
-                    _actionBtn(Icons.phone_outlined, () => _call(item.phone)),
+                    _actionBtn(Icons.phone_outlined, () => _call(context, item.phone)),
                     const SizedBox(width: 6),
-                    _waBtn(() => _whatsapp(item.phone)),
+                    _waBtn(() => _whatsapp(context, item.phone)),
                   ],
                 ),
               ],
@@ -464,9 +464,9 @@ class _ListingCard extends ConsumerWidget {
             child: Icon(Icons.devices_other, color: Colors.grey, size: 34)),
       );
 
-  void _call(String phone) => openPhoneCall(context, phone);
+  void _call(BuildContext context, String phone) => openPhoneCall(context, phone);
 
-  void _whatsapp(String phone) => openWhatsApp(context, phone);
+  void _whatsapp(BuildContext context, String phone) => openWhatsApp(context, phone);
 }
 
 class _CircleBtn extends StatelessWidget {
