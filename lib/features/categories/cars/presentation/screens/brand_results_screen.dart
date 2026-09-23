@@ -15,6 +15,8 @@ import 'car_sale_detail_screen.dart';
 import 'cars_filter_screen.dart';
 import '../../../../../core/utils/image_url.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import '../../../../../core/utils/phone_call.dart';
+import '../../../../../core/utils/whatsapp.dart';
 
 const _kBlue = Color(0xFF2258A8);
 
@@ -707,16 +709,13 @@ class _CarCardState extends ConsumerState<_CarCard> {
                       _ActionBtn(
                         child: const Icon(Icons.phone_outlined,
                             color: _kBlue, size: 14),
-                        onTap: () => launchUrl(Uri.parse('tel:+93700000000')),
+                        onTap: () => openPhoneCall(context, widget.car.phone),
                       ),
                       const SizedBox(width: 6),
                       _ActionBtn(
                         child: const FaIcon(FontAwesomeIcons.whatsapp,
                             color: _kBlue, size: 14),
-                        onTap: () => launchUrl(
-                          Uri.parse('https://wa.me/93700000000'),
-                          mode: LaunchMode.externalApplication,
-                        ),
+                        onTap: () => openWhatsApp(context, widget.car.phone),
                       ),
                     ],
                   ),

@@ -13,6 +13,8 @@ import '../providers/spare_parts_provider.dart';
 import 'spare_parts_detail_screen.dart';
 import '../../../../../core/utils/image_url.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import '../../../../../core/utils/phone_call.dart';
+import '../../../../../core/utils/whatsapp.dart';
 
 const _kBlue = Color(0xFF2258A8);
 
@@ -721,18 +723,9 @@ class _SparePartCardState extends State<_SparePartCard> {
     return '$day ${months[dt.month - 1]}, ${dt.year}';
   }
 
-  Future<void> _launchCall(String phone) async {
-    final cleaned = phone.replaceAll(RegExp(r'[^0-9+]'), '');
-    final uri = Uri.parse('tel:${cleaned.isEmpty ? '+93700000000' : cleaned}');
-    await launchUrl(uri);
-  }
+  Future<void> _launchCall(String phone) => openPhoneCall(context, phone);
 
-  Future<void> _launchWhatsApp(String phone) async {
-    final cleaned = phone.replaceAll(RegExp(r'[^0-9]'), '');
-    final target = cleaned.isEmpty ? '93700000000' : cleaned;
-    final uri = Uri.parse('https://wa.me/$target');
-    await launchUrl(uri, mode: LaunchMode.externalApplication);
-  }
+  Future<void> _launchWhatsApp(String phone) => openWhatsApp(context, phone);
 }
 
 class _CircleBtn extends StatelessWidget {

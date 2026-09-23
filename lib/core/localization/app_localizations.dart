@@ -31,6 +31,8 @@ class AppLocalizations {
 
   static const _localizedValues = <String, Map<String, String>>{
     'en': {
+      'seller_no_phone': 'This seller has not added a phone number.',
+      'cannot_place_call': 'Could not start the call.',
       'Post for a customer': 'Post for a customer',
       'Customer Name': 'Customer Name',
       'Customer WhatsApp Number': 'Customer WhatsApp Number',
@@ -418,6 +420,8 @@ class AppLocalizations {
       'check_out_listing': 'Check out this car: {text} - {price} on Afghan Deals Pro',
     },
     'ps': {
+      'seller_no_phone': 'دې پلورونکي د ټیلیفون شمېره نه ده ورکړې.',
+      'cannot_place_call': 'زنګ ونه وهل شو.',
       'Post for a customer': 'د پیرودونکي لپاره اعلان',
       'Customer Name': 'د پیرودونکي نوم',
       'Customer WhatsApp Number': 'د پیرودونکي د واټساپ شمېره',
@@ -968,6 +972,8 @@ class AppLocalizations {
       'check_out_listing': 'دا موتر وگوره: {text} - {price} د Afghan Deals Pro کې',
     },
     'fa': {
+      'seller_no_phone': 'این فروشنده شماره تماس اضافه نکرده است.',
+      'cannot_place_call': 'تماس برقرار نشد.',
       'Post for a customer': 'ثبت اعلان برای مشتری',
       'Customer Name': 'نام مشتری',
       'Customer WhatsApp Number': 'شماره واتساپ مشتری',
@@ -1331,6 +1337,8 @@ class AppLocalizations {
       'check_out_listing': 'اس خودرو کو دیکھیں: {text} - {price} on Afghan Deals Pro',
     },
     'ur': {
+      'seller_no_phone': 'اس بیچنے والے نے فون نمبر شامل نہیں کیا۔',
+      'cannot_place_call': 'کال نہیں ہو سکی۔',
       'Post for a customer': 'گاہک کے لیے اشتہار',
       'Customer Name': 'گاہک کا نام',
       'Customer WhatsApp Number': 'گاہک کا واٹس ایپ نمبر',

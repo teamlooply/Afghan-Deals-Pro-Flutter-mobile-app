@@ -15,6 +15,7 @@ import '../../../../../features/listings/data/models/furniture_listing_model.dar
 import '../../../../../core/utils/image_url.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../../core/utils/whatsapp.dart';
+import '../../../../../core/utils/phone_call.dart';
 
 class FurnitureDetailScreen extends ConsumerStatefulWidget {
   final FurnitureListingModel item;
@@ -283,7 +284,7 @@ class _FurnitureDetailScreenState extends ConsumerState<FurnitureDetailScreen> {
                 children: [
                   Expanded(
                       child: _detailAction(Icons.phone_outlined, 'Call',
-                          onTap: () => _launch('tel:${item.phone}'))),
+                          onTap: () => openPhoneCall(context, item.phone))),
                   const SizedBox(width: 8),
                   Expanded(
                       child: _whatsAppAction(

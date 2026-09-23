@@ -16,6 +16,7 @@ import '../../../../../features/listings/data/models/classified_listing_model.da
 import '../../../../../core/utils/image_url.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../../core/utils/whatsapp.dart';
+import '../../../../../core/utils/phone_call.dart';
 
 class ClassifiedsDetailScreen extends ConsumerStatefulWidget {
   final ClassifiedListingModel item;
@@ -284,15 +285,11 @@ class _ClassifiedsDetailScreenState
                 children: [
                   Expanded(
                       child: _detailAction(Icons.phone_outlined, context.l10n.t('call'),
-                          onTap: () => _launch('tel:${item.phone}'))),
+                          onTap: () => openPhoneCall(context, item.phone))),
                   const SizedBox(width: 8),
                   Expanded(
                       child: _whatsAppAction(
                           onTap: () => openWhatsApp(context, item.phone))),
-                  const SizedBox(width: 8),
-                  Expanded(
-                      child: _detailAction(Icons.message_outlined, context.l10n.t('chat'),
-                          onTap: _openChat)),
                 ],
               ),
             ),

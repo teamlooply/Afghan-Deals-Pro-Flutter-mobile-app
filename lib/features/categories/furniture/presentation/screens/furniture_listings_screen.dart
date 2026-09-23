@@ -15,6 +15,8 @@ import 'furniture_detail_screen.dart';
 import 'furniture_filter_screen.dart';
 import '../../../../../core/utils/image_url.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import '../../../../../core/utils/phone_call.dart';
+import '../../../../../core/utils/whatsapp.dart';
 
 const _kBlue = Color(0xFF2258A8);
 
@@ -437,18 +439,9 @@ class _FurnitureResultCardState extends State<_FurnitureResultCard> {
     );
   }
 
-  void _call(String phone) {
-    final cleaned = phone.replaceAll(RegExp(r'[^0-9+]'), '');
-    launchUrl(Uri.parse('tel:${cleaned.isEmpty ? '+93700000000' : cleaned}'));
-  }
+  void _call(String phone) => openPhoneCall(context, phone);
 
-  void _whatsapp(String phone) {
-    final cleaned = phone.replaceAll(RegExp(r'[^0-9]'), '');
-    launchUrl(
-      Uri.parse('https://wa.me/${cleaned.isEmpty ? '93700000000' : cleaned}'),
-      mode: LaunchMode.externalApplication,
-    );
-  }
+  void _whatsapp(String phone) => openWhatsApp(context, phone);
 }
 
 class _CircleBtn extends StatelessWidget {

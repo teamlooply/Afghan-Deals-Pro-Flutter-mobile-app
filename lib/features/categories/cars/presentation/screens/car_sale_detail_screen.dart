@@ -17,6 +17,7 @@ import '../../../../chat/presentation/providers/chat_provider.dart';
 import '../../../../../features/listings/data/models/car_sale_model.dart';
 import '../../../../../core/utils/image_url.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import '../../../../../core/utils/phone_call.dart';
 
 class CarSaleDetailScreen extends ConsumerStatefulWidget {
   final CarSaleModel car;
@@ -276,7 +277,8 @@ class _CarSaleDetailScreenState extends ConsumerState<CarSaleDetailScreen> {
                     const SizedBox(height: 14),
                     Row(
                       children: [
-                        Expanded(child: _detailAction(Icons.message_outlined, context.l10n.t('chat'), onTap: _openChat)),
+                        Expanded(child: _detailAction(Icons.phone_outlined, context.l10n.t('call'),
+                            onTap: () => openPhoneCall(context, _sellerPhone))),
                         const SizedBox(width: 8),
                         Expanded(child: _whatsAppAction(onTap: _openWhatsApp)),
                       ],

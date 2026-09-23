@@ -18,6 +18,8 @@ import '../../../../chat/presentation/providers/chat_provider.dart';
 import '../providers/spare_parts_provider.dart';
 import '../../../../../core/utils/image_url.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import '../../../../../core/utils/phone_call.dart';
+import '../../../../../core/utils/whatsapp.dart';
 
 const _kBlue = Color(0xFF2258A8);
 
@@ -477,18 +479,9 @@ class _SparePartsDetailScreenState
     );
   }
 
-  Future<void> _launchCall(String phone) async {
-    final cleaned = phone.replaceAll(RegExp(r'[^0-9+]'), '');
-    final uri = Uri.parse('tel:${cleaned.isEmpty ? '+93700000000' : cleaned}');
-    await launchUrl(uri);
-  }
+  Future<void> _launchCall(String phone) => openPhoneCall(context, phone);
 
-  Future<void> _launchWhatsApp(String phone) async {
-    final cleaned = phone.replaceAll(RegExp(r'[^0-9]'), '');
-    final target = cleaned.isEmpty ? '93700000000' : cleaned;
-    final uri = Uri.parse('https://wa.me/$target');
-    await launchUrl(uri, mode: LaunchMode.externalApplication);
-  }
+  Future<void> _launchWhatsApp(String phone) => openWhatsApp(context, phone);
 
   Future<void> _openMap(SparePartListing item) async {
     final mapUrl = item.mapUrl;

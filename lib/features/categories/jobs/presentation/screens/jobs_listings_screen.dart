@@ -19,6 +19,8 @@ import 'jobs_detail_screen.dart';
 import 'jobs_filter_screen.dart';
 import '../../../../../core/utils/image_url.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import '../../../../../core/utils/phone_call.dart';
+import '../../../../../core/utils/whatsapp.dart';
 
 const _kBlue = Color(0xFF2258A8);
 
@@ -296,7 +298,7 @@ class _JobResultCardState extends State<_JobResultCard> {
 
   Future<void> _handleCall() async {
     final cleaned = widget.item.phone.replaceAll(RegExp(r'[^0-9+]'), '');
-    final phone = cleaned.isEmpty ? '+93700000000' : cleaned;
+    final phone = cleaned;
     await launchUrl(Uri.parse('tel:$phone'));
   }
 

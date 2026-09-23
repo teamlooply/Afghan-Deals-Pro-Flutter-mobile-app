@@ -17,6 +17,7 @@ import '../../../../../features/listings/data/models/mobile_listing_model.dart';
 import '../../../../../core/utils/image_url.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../../core/utils/whatsapp.dart';
+import '../../../../../core/utils/phone_call.dart';
 
 class MobileDetailScreen extends ConsumerStatefulWidget {
   final MobileListingModel mobile;
@@ -297,13 +298,9 @@ class _MobileDetailScreenState extends ConsumerState<MobileDetailScreen> {
                 children: [
                   Expanded(
                       child: _detailAction(Icons.phone_outlined, context.l10n.t('call'),
-                          onTap: () => _launch('tel:${mobile.phone}'))),
+                          onTap: () => openPhoneCall(context, mobile.phone))),
                   const SizedBox(width: 8),
                   Expanded(child: _whatsAppAction(onTap: () => openWhatsApp(context, mobile.phone))),
-                  const SizedBox(width: 8),
-                  Expanded(
-                      child: _detailAction(Icons.message_outlined, context.l10n.t('chat'),
-                          onTap: _openChat)),
                 ],
               ),
             ),

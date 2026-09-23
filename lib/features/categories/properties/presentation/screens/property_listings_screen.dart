@@ -20,6 +20,8 @@ import '../../data/models/property_listing_model.dart';
 import '../providers/property_filtered_listings_provider.dart';
 import '../../../../../core/utils/image_url.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import '../../../../../core/utils/phone_call.dart';
+import '../../../../../core/utils/whatsapp.dart';
 
 // ignore_for_file: unused_import
 
@@ -656,16 +658,13 @@ class _PropertyCardState extends State<_PropertyCard> {
                       _ActionBtn(
                         child: const Icon(Icons.phone_outlined,
                             color: _kBlue, size: 14),
-                        onTap: () => launchUrl(Uri.parse('tel:+93700000000')),
+                        onTap: () => openPhoneCall(context, widget.item.phone),
                       ),
                       const SizedBox(width: 6),
                       _ActionBtn(
                         child: const FaIcon(FontAwesomeIcons.whatsapp,
                             color: _kBlue, size: 14),
-                        onTap: () => launchUrl(
-                          Uri.parse('https://wa.me/93700000000'),
-                          mode: LaunchMode.externalApplication,
-                        ),
+                        onTap: () => openWhatsApp(context, widget.item.phone),
                       ),
                     ],
                   ),

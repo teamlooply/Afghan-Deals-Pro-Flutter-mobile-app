@@ -17,6 +17,7 @@ import '../../data/models/property_listing_model.dart';
 import '../../../../../core/utils/image_url.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../../core/utils/whatsapp.dart';
+import '../../../../../core/utils/phone_call.dart';
 
 class PropertyDetailScreen extends ConsumerStatefulWidget {
   final PropertyListingModel property;
@@ -289,13 +290,9 @@ class _PropertyDetailScreenState extends ConsumerState<PropertyDetailScreen> {
                 children: [
                   Expanded(
                       child: _detailAction(Icons.phone_outlined, context.l10n.t('call'),
-                          onTap: () => _launch('tel:${property.phone}'))),
+                          onTap: () => openPhoneCall(context, property.phone))),
                   const SizedBox(width: 8),
                   Expanded(child: _whatsAppAction(onTap: () => openWhatsApp(context, property.phone))),
-                  const SizedBox(width: 8),
-                  Expanded(
-                      child: _detailAction(Icons.message_outlined, context.l10n.t('chat'),
-                          onTap: _openChat)),
                 ],
               ),
             ),
